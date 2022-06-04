@@ -4,7 +4,7 @@ namespace MemoryGame
     {
         readonly List<Bitmap> bitmap = new List<Bitmap> { Properties.Resources._1, Properties.Resources._2,
         Properties.Resources._3, Properties.Resources._4, Properties.Resources._5, Properties.Resources._6};
-
+        List<Bitmap> listMatch = new List<Bitmap>();
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace MemoryGame
             {
                 j = listShuffle[i];
                 ((PictureBox)gbMemory.Controls[i]).Image = bitmap[j];
+                listMatch.Add(bitmap[j]);
             }
         }
 
@@ -46,6 +47,7 @@ namespace MemoryGame
             // untuk mengetahui index yang di klik di picture box
             int index = gbMemory.Controls.IndexOf(sender as PictureBox);
             label.Text = Convert.ToString(index);
+            ((PictureBox)gbMemory.Controls[index]).Image = listMatch[index];
         }
 
         private void HideImage()
