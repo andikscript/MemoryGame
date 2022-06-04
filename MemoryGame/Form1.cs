@@ -33,20 +33,27 @@ namespace MemoryGame
         bool a = true;
         private void pb1Click(object sender, EventArgs e)
         {
-            if (a)
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HideImage();
+        }
+
+        private void ClickPicture(object sender, EventArgs e)
+        {
+            // untuk mengetahui index yang di klik di picture box
+            int index = gbMemory.Controls.IndexOf(sender as PictureBox);
+            label.Text = Convert.ToString(index);
+        }
+
+        private void HideImage()
+        {
+            for (int i = 0; i < gbMemory.Controls.Count; i++)
             {
-                ((PictureBox)gbMemory.Controls[8]).Image = Properties.Resources._1;
-            } else
-            {
-                ((PictureBox)gbMemory.Controls[8]).Image = null;
+                ((PictureBox)gbMemory.Controls[i]).Image = Properties.Resources.question;
             }
-            a = !a;
-            ((PictureBox)gbMemory.Controls[3]).Image = Properties.Resources._6;
-            ((PictureBox)gbMemory.Controls[4]).Image = Properties.Resources._5;
-            ((PictureBox)gbMemory.Controls[5]).Image = Properties.Resources._4;
-            ((PictureBox)gbMemory.Controls[6]).Image = Properties.Resources._3;
-            ((PictureBox)gbMemory.Controls[7]).Image = Properties.Resources._2;
-            ((PictureBox)gbMemory.Controls[8]).Image = Properties.Resources._1;
         }
     }
 }
