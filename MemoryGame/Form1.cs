@@ -4,9 +4,9 @@ namespace MemoryGame
     {
         readonly List<Bitmap> bitmap = new List<Bitmap> { Properties.Resources._1, Properties.Resources._2,
         Properties.Resources._3, Properties.Resources._4, Properties.Resources._5, Properties.Resources._6};
-        List<Bitmap> listMatch = new List<Bitmap>();
+        readonly List<Bitmap> listMatch = new List<Bitmap>();
         List<int> listNumber = new List<int>();
-        List<int> listConvert = new List<int>();
+        List<int> listCompare = new List<int>();
         List<int> listIndex = new List<int>();
         int count = 0;
         public Form1()
@@ -37,28 +37,21 @@ namespace MemoryGame
             }
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        
-
         private void ClickPicture(object sender, EventArgs e)
         {
 
             // untuk mengetahui index yang di klik di picture box
             int index = gbMemory.Controls.IndexOf(sender as PictureBox);
             ((PictureBox)gbMemory.Controls[index]).Image = listMatch[index];
-            listConvert.Add(listNumber[index]);
+            listCompare.Add(listNumber[index]);
             listIndex.Add(index);
             
-            if (listConvert.Count == 2)
+            if (listCompare.Count == 2)
             {
-                if (listConvert[0] == listConvert[1])
+                if (listCompare[0] == listCompare[1] && listIndex[0] != listIndex[1])
                 {
-                    ((PictureBox)gbMemory.Controls[listIndex[0]]).Image = bitmap[listConvert[0]];
-                    ((PictureBox)gbMemory.Controls[listIndex[1]]).Image = bitmap[listConvert[1]];
+                    ((PictureBox)gbMemory.Controls[listIndex[0]]).Visible = false;
+                    ((PictureBox)gbMemory.Controls[listIndex[1]]).Visible = false;
                     count += 1;
                 } else
                 {
@@ -66,7 +59,7 @@ namespace MemoryGame
                     ((PictureBox)gbMemory.Controls[listIndex[1]]).Image = Properties.Resources.question;
                 }
 
-                listConvert.Clear();
+                listCompare.Clear();
                 listIndex.Clear();
             }
 
@@ -75,8 +68,9 @@ namespace MemoryGame
                 MessageBox.Show("Congratulation...\nMemory Game is Win\n");
                 listMatch.Clear();
                 listNumber.Clear();
-                listConvert.Clear();
+                listCompare.Clear();
                 listIndex.Clear();
+                VisibleImage();
                 Shuffle();
                 HideImage();
                 count = 0;
@@ -89,6 +83,19 @@ namespace MemoryGame
             {
                 ((PictureBox)gbMemory.Controls[i]).Image = Properties.Resources.question;
             }
+        }
+
+        private void VisibleImage()
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                ((PictureBox)gbMemory.Controls[i]).Visible = true;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
