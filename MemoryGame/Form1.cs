@@ -1,7 +1,10 @@
+using System.Timers;
+
 namespace MemoryGame
 {
     public partial class Form1 : Form
     {
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         readonly List<Bitmap> bitmap = new List<Bitmap> { Properties.Resources._1, Properties.Resources._2,
         Properties.Resources._3, Properties.Resources._4, Properties.Resources._5, Properties.Resources._6};
         readonly List<Bitmap> listMatch = new List<Bitmap>();
@@ -9,16 +12,35 @@ namespace MemoryGame
         List<int> listCompare = new List<int>();
         List<int> listIndex = new List<int>();
         int count = 0;
+        int counter = 60;
+
         public Form1()
         {
             InitializeComponent();
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Interval = 1000;
+            labelTime.Text = "01:00";
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            counter--;
+            if (counter == 0)
+                timer.Stop();
+            labelTime.Text = counter.ToString().Length == 1 ? "00:0" + counter.ToString() :
+                "00:" + counter.ToString();
+            if (labelTime.Text == "00:00")
+            {
+                MessageBox.Show("Waktu Habis\nCoba Kembali", "Picture Puzzle-Image");
+                ResetImage();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Shuffle();
             HideImage();
-            // pictureBox2.Visible = false;
+            gbMemory.Enabled = false;
         }
 
         private void Shuffle()
@@ -66,15 +88,25 @@ namespace MemoryGame
             if (count == 6)
             {
                 MessageBox.Show("Congratulation...\nMemory Game is Win\n");
-                listMatch.Clear();
-                listNumber.Clear();
-                listCompare.Clear();
-                listIndex.Clear();
-                VisibleImage();
-                Shuffle();
-                HideImage();
-                count = 0;
+                ResetImage();
+                timer.Stop();
             }
+        }
+
+        private void ResetImage()
+        {
+            listMatch.Clear();
+            listNumber.Clear();
+            listCompare.Clear();
+            listIndex.Clear();
+            VisibleImage();
+            Shuffle();
+            HideImage();
+            count = 0;
+            counter = 60;
+            labelTime.Text = "01:00";
+            Button_Start.Enabled = true;
+            gbMemory.Enabled = false;
         }
 
         private void HideImage()
@@ -92,10 +124,25 @@ namespace MemoryGame
                 ((PictureBox)gbMemory.Controls[i]).Visible = true;
             }
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Button_Exit(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            var YesOrNo = new DialogResult();
+            YesOrNo = MessageBox.Show("Apakah Anda Ingin Keluar??",
+                    "Memory Game is Win", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (YesOrNo == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void Button_Start_Click(object sender, EventArgs e)
+        {
+            if (Button_Start.Text == "START")
+            {
+                Button_Start.Enabled = false;
+                gbMemory.Enabled = true;
+                timer.Start();
+            } 
         }
     }
 }

@@ -41,7 +41,9 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
+            this.labelTime = new System.Windows.Forms.Label();
+            this.Button_Start = new System.Windows.Forms.Button();
             this.gbMemory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
@@ -221,22 +223,47 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.ClickPicture);
             // 
-            // button1
+            // Exit
             // 
-            this.button1.Location = new System.Drawing.Point(215, 388);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.Exit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Exit.Location = new System.Drawing.Point(481, 79);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(148, 35);
+            this.Exit.TabIndex = 1;
+            this.Exit.Text = "EXIT";
+            this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Button_Exit);
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelTime.ForeColor = System.Drawing.Color.Red;
+            this.labelTime.Location = new System.Drawing.Point(528, 125);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(58, 25);
+            this.labelTime.TabIndex = 2;
+            this.labelTime.Text = "01:00";
+            // 
+            // Button_Start
+            // 
+            this.Button_Start.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Button_Start.Location = new System.Drawing.Point(481, 38);
+            this.Button_Start.Name = "Button_Start";
+            this.Button_Start.Size = new System.Drawing.Size(148, 35);
+            this.Button_Start.TabIndex = 3;
+            this.Button_Start.Text = "START";
+            this.Button_Start.UseVisualStyleBackColor = true;
+            this.Button_Start.Click += new System.EventHandler(this.Button_Start_Click);
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(501, 432);
+            this.ClientSize = new System.Drawing.Size(665, 388);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Button_Start);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.gbMemory);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
@@ -257,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -275,6 +303,8 @@
         private PictureBox pictureBox12;
         private PictureBox pictureBox11;
         private PictureBox pictureBox10;
-        private Button button1;
+        private Button Exit;
+        private Label labelTime;
+        private Button Button_Start;
     }
 }
